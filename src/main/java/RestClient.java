@@ -4,6 +4,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.GetRequest;
 
+import javax.rmi.CORBA.Util;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +20,13 @@ public class RestClient {
         System.setProperty("javax.net.ssl.trustStorePassword","wso2carbon");
 
         // Application Configuration Parameters
-        String clientID = "55ex_QhnZRFC98DeDtMegvcL7nca";
-        String clientSecret = "nBx2fZ8PIsJuGdvzEyetcIOHfvca";
+        String clientID = "Bw4XRc2Zn4V1TOVRORRwECr1Efsa";
+        String clientSecret = "76UjVfafn9FoX0FwwTPFx974KOEa";
         String username = "admin";
         String password = "admin";
 
 
-        for (int i = 0; i <100; i++ ) {
+        for (int i = 0; i <1; i++ ) {
             testPatch(clientID, clientSecret, username, password);
         }
     }
@@ -56,6 +57,9 @@ public class RestClient {
         assert retryFlowToken != null: "Access Token Request with new authorization code Failed";
         assert !retryFlowToken.equals(accessTokenFirst) : "Revoked Access Token returned for new authz code";
         System.out.println("----");
+
+        System.out.println("-- check whether prev. token is revoked --");
+        Utils.doUserInfoCall(accessTokenFirst);
     }
 
     private static String getAccessToken(String basicAuthzHeader, String code) throws UnirestException {

@@ -59,5 +59,17 @@ public class Utils {
         return new Pair<>(access_token, idToken);
     }
 
+    public static void doUserInfoCall(String token) throws UnirestException {
+        HttpResponse<String> response = Unirest.get("https://localhost:9443/oauth2/userinfo?schema=openid")
+                .header("Authorization", "Bearer " + token)
+                .asString();
+
+        System.out.println("--- USER INFO ---");
+        System.out.println(response.getStatus());
+        System.out.println(response.getBody());
+        System.out.println("--- USER INFO ---");
+        assert response.getStatus() == 200;
+    }
+
 
 }
